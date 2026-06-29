@@ -10,14 +10,14 @@ import {
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// User's provided Firebase Configuration
+// User's provided Firebase Configuration loaded from environment variables to prevent GitHub secret alerts
 export const firebaseConfig = {
-  apiKey: "AIzaSyA3FLqAytX0Rwn1JXNykNo1ag9UiYxQEJU",
-  authDomain: "folkloric-well-n7k72.firebaseapp.com",
-  projectId: "folkloric-well-n7k72",
-  storageBucket: "folkloric-well-n7k72.firebasestorage.app",
-  messagingSenderId: "417896133832",
-  appId: "1:417896133832:web:c654c30e1016804b8fa1fd"
+  apiKey: (import.meta as any).env.VITE_FIREBASE_API_KEY,
+  authDomain: (import.meta as any).env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: (import.meta as any).env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: (import.meta as any).env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: (import.meta as any).env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: (import.meta as any).env.VITE_FIREBASE_APP_ID
 };
 
 // Initialize Firebase App
