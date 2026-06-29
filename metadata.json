@@ -1,0 +1,6 @@
+{
+  "name": "Luxe Cocoa",
+  "description": "An exquisite full-stack artisanal chocolate shop and bespoke chocolate bar creator, complete with an AI Sommelier flavor pairing assistant.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

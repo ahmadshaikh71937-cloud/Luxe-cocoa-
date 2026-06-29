@@ -1,0 +1,41 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && 
+        "email" in request.auth.token && (
+          request.auth.token.email.lower() == "ahmadshaikh71937@gmail.com" ||
+          request.auth.token.email.lower() == "saleemshaikh3010@gmail.com"
+        );
+    }
+
+    // Match orders
+    match /orders/{orderId} {
+      // Owner or Admin can read individual orders
+      allow get: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      
+      // Owner or Admin can list orders
+      allow list: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      
+      // Any authenticated user can create their own order, or Admin can create any order
+      allow create: if isSignedIn() && (request.resource.data.userId == request.auth.uid || isAdmin());
+                    
+      // Owner or Admin can update orders
+      allow update: if isSignedIn() && (resource.data.userId == request.auth.uid || isAdmin());
+      
+      // Only Admin can delete orders
+      allow delete: if isAdmin();
+    }
+  }
+}

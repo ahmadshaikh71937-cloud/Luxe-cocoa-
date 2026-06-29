@@ -1,0 +1,54 @@
+{
+  "entities": {
+    "Order": {
+      "title": "Order",
+      "description": "Order records representing purchase of luxury chocolates",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "specialInstructions": {
+          "type": "string"
+        },
+        "subtotal": {
+          "type": "number"
+        },
+        "delivery": {
+          "type": "number"
+        },
+        "total": {
+          "type": "number"
+        },
+        "status": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array"
+        }
+      },
+      "required": ["id", "name", "email", "address", "subtotal", "delivery", "total", "status", "createdAt", "userId", "items"]
+    }
+  },
+  "firestore": {
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Purchase orders made by authenticated users, secured by userId check"
+    }
+  }
+}
